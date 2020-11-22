@@ -22,34 +22,34 @@ class AllotForm extends React.Component {
       for (var i = 0; i < residents.length; i++) {
         residents[i] = parseInt(residents[i]);
       }
-    }
-    var latitude = parseFloat(lat.trim()) * 10**8;
-    var longitude = parseFloat(long.trim()) * 10**8;
-    if (isNaN(longitude) || isNaN(latitude)) {
-      console.log("YO")
-      alert("Longitude and Latitude must be numbers")
-    }
-    else {
-      const web3 = this.props.drizzle.web3;
-      var nonce = Math.floor(Math.random() * 10**8);
-      var obj = web3.eth.abi.encodeParameters(
-        ['uint', 'uint', 'string', 'string', 'uint[]', 'uint'],
-        [latitude, longitude, address_line_1, address_line_2, residents, nonce]
-      );
-      var hash = web3.utils.sha3(obj, {encoding: "hex"});
-      console.log(hash);
-      alert("Your Nonce is " + nonce + " Please do not forget")
-      // let a = await web3.eth.getAccounts();
-      // const { drizzle, drizzleState } = this.props;
-      // const contract = drizzle.contracts.MyStringStore;
-      // let result = contract.methods.set("HAHA").send({
-      //   from: drizzleState.accounts[0],
-      // });
-      // result.then((val) => {
-      //   console.log(val);
-      // }).catch((err) => {
-      //   console.log(err);
-      // });
+      var latitude = parseFloat(lat.trim()) * 10**8;
+      var longitude = parseFloat(long.trim()) * 10**8;
+      if (isNaN(longitude) || isNaN(latitude)) {
+        console.log("YO")
+        alert("Longitude and Latitude must be numbers")
+      }
+      else {
+        const web3 = this.props.drizzle.web3;
+        var nonce = Math.floor(Math.random() * 10**8);
+        var obj = web3.eth.abi.encodeParameters(
+          ['uint', 'uint', 'string', 'string', 'uint[]', 'uint'],
+          [latitude, longitude, address_line_1, address_line_2, residents, nonce]
+        );
+        var hash = web3.utils.sha3(obj, {encoding: "hex"});
+        console.log(hash);
+        alert("Your Nonce is " + nonce + " Please do not forget")
+        // let a = await web3.eth.getAccounts();
+        // const { drizzle, drizzleState } = this.props;
+        // const contract = drizzle.contracts.MyStringStore;
+        // let result = contract.methods.set("HAHA").send({
+        //   from: drizzleState.accounts[0],
+        // });
+        // result.then((val) => {
+        //   console.log(val);
+        // }).catch((err) => {
+        //   console.log(err);
+        // });
+      }
     }
   }
 

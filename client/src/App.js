@@ -38,7 +38,7 @@ class App extends React.Component {
       <Router>
         <div className="App">
           <Container>
-          <Navbar bg="dark" expand="lg" variant="dark">
+          <Navbar bg="primary" expand="lg" variant="dark">
 				    <Navbar.Brand as={Link} to="/">AddressTracker</Navbar.Brand>
 				    <Navbar.Toggle aria-controls="basic-navbar-nav" />
 				    <Navbar.Collapse id="basic-navbar-nav">
