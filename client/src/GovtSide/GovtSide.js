@@ -29,12 +29,12 @@ class GovtSide extends React.Component {
           <div className="flex-container container">
             <div className="flex-child mint">
               <Container>
-                <MintForm />
+                <MintForm drizzle={this.props.drizzle} drizzleState={this.props.drizzleState} />
               </Container>
             </div>
             <div className="flex-child allot">
               <Container>
-                <AllotForm />
+                <AllotForm drizzle={this.props.drizzle} drizzleState={this.props.drizzleState} />
               </Container>
             </div>
           </div>
