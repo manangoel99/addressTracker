@@ -6,6 +6,8 @@ import AddressForm from "./Form";
 import React from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'; 
 import { Navbar, Nav, Form, FormControl, Button, NavItem } from 'react-bootstrap';
+import { Container } from "@material-ui/core";
+// import Nav from 'react-bootstrap/Nav'
 
 class App extends React.Component {
   state = { loading: true, drizzleState: null };
@@ -35,10 +37,17 @@ class App extends React.Component {
     return (
       <Router>
         <div className="App">
-          <ul className="App-header">
-            <li><Link to="/govt">Government Side</Link></li>
-            <li><Link to="/user">User Side</Link></li>
-          </ul>
+          <Container>
+          <Navbar bg="dark" expand="lg" variant="dark">
+				    <Navbar.Brand as={Link} to="/">AddressTracker</Navbar.Brand>
+				    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+				    <Navbar.Collapse id="basic-navbar-nav">
+				    	<Nav className="mr-auto">
+				    		<Nav.Link as={Link} to="/govt">Government Side</Nav.Link>
+				    		<Nav.Link as={Link} to="/user">User Side</Nav.Link>
+				    	</Nav>
+				    </Navbar.Collapse>
+			    </Navbar>
           <Switch>
             <Route
              exact path='/' 
@@ -59,6 +68,8 @@ class App extends React.Component {
               } 
             />
           </Switch>
+        </Container>
+
         </div>
       </Router>
     );
