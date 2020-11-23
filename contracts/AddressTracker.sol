@@ -9,6 +9,8 @@ contract AddressTracker {
   mapping(ERC20AddressTracker => bytes32) tokenToCompleteHash;
   mapping(bytes32 => bool) locationExist;
   mapping(address => ERC20AddressTracker[]) tokenOwner;
+  mapping(address => bool) isAuthorized;
+  address[] authorities;
   address govtAddress;
   bool addressSet;
 
@@ -20,6 +22,8 @@ contract AddressTracker {
     require(addressSet == false, "The government address should not be set");
     govtAddress = _govtAddress;
     addressSet = true;
+    isAuthorized[govtAddress] = true;
+    authorities.push(govtAddress);
   }
   
   function getGovtAddress() public view returns(address) {
@@ -48,26 +52,32 @@ contract AddressTracker {
       return token.balanceOf(person);
   }
   
+  function issueAuthorisation(address _authority) public {
+    require(msg.sender == govtAddress, "Only government can issue an authorisation");
+    isAuthorized[_authority] = true;
+    authorities.push(_authority);
+  }
+
   function mintToken(bytes32 locationHash) public {
     // locationHash -> hash([long, lat, add1, add2])
     // will get token address
     require(locationExist[locationHash] == false, "Token for this location already exist");
-    require(msg.sender == govtAddress, "Only the government can mint tokens");
+    require(isAuthorized[msg.sender] == true, "Only the government and authorizing organization can mint tokens");
     ERC20AddressTracker tkn = new ERC20AddressTracker("x", "x", locationHash);
-    tkn.mintNeeded(govtAddress, 1);
+    tkn.mintNeeded(msg.sender, 1);
     locationToToken[locationHash] = tkn;
     locationExist[locationHash] = true;
-    tokenToOwner[tkn] = govtAddress;
-    tokenOwner[govtAddress].push(tkn);
+    tokenToOwner[tkn] = msg.sender;
+    tokenOwner[msg.sender].push(tkn);
   }
 
   function remove(uint index, ERC20AddressTracker[] memory array) private returns(ERC20AddressTracker[] memory) {
-        for (uint i = index; i<array.length-1; i++){
-            array[i] = array[i+1];
-        }
-        delete array[array.length-1];
-        // array.length--;
-        return array;
+    for (uint i = index; i<array.length-1; i++){
+        array[i] = array[i+1];
+    }
+    delete array[array.length-1];
+    // array.length--;
+    return array;
     }
   
   function allot(bytes32 locationHash, bytes32 completeHash, address owner) public {
@@ -75,21 +85,31 @@ contract AddressTracker {
     // completeHash -> hash([long, lat, add1, add2, resident hash, nonce])
     // owner -> first resident
     require(locationExist[locationHash] == true, "Token for this location does not exist");
-    require(msg.sender == govtAddress, "Only the government can allot a new token");
+    require(isAuthorized[msg.sender] == true, "Only the government and authorizing organization can mint tokens");
     ERC20AddressTracker token = locationToToken[locationHash];
-    require(tokenToOwner[token] == govtAddress, "Token alloted alreay");
+    require(isAuthorized[tokenToOwner[token]] == true, "Token alloted already");
     tokenToCompleteHash[token] = completeHash;
     tokenToOwner[token] = owner;
-    token.transferNeeded(govtAddress, owner, 1);
+    token.transferNeeded(msg.sender, owner, 1);
     // tokenOwner[govtAddress] = 0;
-    uint idx = 0;
-    for (idx = 0; idx < tokenOwner[govtAddress].length; idx++) {
-      if(keccak256(abi.encodePacked(tokenOwner[govtAddress][idx])) == keccak256(abi.encode(token))) {
+    uint idx1 = 0;
+    uint idx2 = 0;
+    uint flag = 0;
+    for(idx1 = 0; idx1 < authorities.length; idx1++){
+      address IA = authorities[idx1];
+      for(idx2 = 0; idx2 < tokenOwner[IA].length; idx2++){
+        if(keccak256(abi.encodePacked(tokenOwner[IA][idx2])) == keccak256(abi.encode(token))) {
+          flag = 1;
+          break;
+        }
+      }
+      if(flag == 1){
         break;
       }
     }
+
     tokenOwner[owner].push(token);
-    tokenOwner[govtAddress] = remove(idx, tokenOwner[govtAddress]);
+    tokenOwner[authorities[idx1]] = remove(idx2, tokenOwner[authorities[idx1]]);
     // delete tokenOwner[govtAddress][idx];
   }
   
