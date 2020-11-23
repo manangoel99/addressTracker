@@ -31,8 +31,10 @@ class MintForm extends React.Component {
       else {
         const { drizzle, drizzleState } = this.props;
         const contract = drizzle.contracts.AddressTracker;
+        console.log(hash, drizzleState.accounts[userId]);
         let result = contract.methods.mintToken(hash).send({
           from: drizzleState.accounts[userId],
+          gas: 3000000,
         });
         result.then((val) => {
           alert("Token Minted Successfully");

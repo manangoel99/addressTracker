@@ -21,6 +21,7 @@ class GovtSide extends React.Component {
         let accounts = this.props.drizzleState.accounts;
         let result = contract.methods.setGovtAddress(accounts[0]).send({
           from: accounts[0],
+          gas: 300000,
         });
         result.then((value) => {
           alert("Account Successfully Set");

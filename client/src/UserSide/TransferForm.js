@@ -2,20 +2,18 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 
 class TransferForm extends React.Component {
 
     transferToken = async () => {
-        var lat = document.getElementById("AllotLatitude").value;
-        var long = document.getElementById("AllotLongitude").value;
-        var address_line_1 = document.getElementById("AllotAddress1").value;
-        var address_line_2 = document.getElementById("AllotAddress2").value;
+        var lat = document.getElementById("TransferLatitude").value;
+        var long = document.getElementById("TransferLongitude").value;
+        var address_line_1 = document.getElementById("TransferAddress1").value;
+        var address_line_2 = document.getElementById("TransferAddress2").value;
         var residents = document.getElementById("CurrentResidents").value.trim();
         residents = residents.split(",");
-        if (residents.length == 0) {
+        if (residents.length === 0) {
           alert("There must be at least one resident");
         }
         else {
@@ -24,7 +22,7 @@ class TransferForm extends React.Component {
           }
           var NewResidents = document.getElementById("NewResidents").value.trim();
           NewResidents = NewResidents.split(",");
-          if (NewResidents.length == 0) {
+          if (NewResidents.length === 0) {
             alert("There must be at least one resident");
           }
           else {
@@ -60,8 +58,15 @@ class TransferForm extends React.Component {
                     ['uint', 'uint', 'string', 'string', 'uint[]', 'uint'],
                     [latitude, longitude, address_line_1, address_line_2, NewResidents, newNonce]
                   );
+                  const contract = this.props.drizzle.contracts.AddressTracker;
                   var new_hash = web3.utils.sha3(new_obj, {encoding: "hex"});
-                  let result = contract.methods.transfer(loc_hash, old_hash, new_hash);
+                  var newOwner = parseInt(document.getElementById("NewOwnerTransfer").value.trim());
+                  console.log(loc_hash, old_hash, new_hash, newOwner);
+                  let result = await contract.methods.transfer(loc_hash, old_hash, new_hash).send({
+                    gas: 3000000,
+                    from: this.props.drizzleState.accounts[newOwner],
+                  });
+                  console.log(result);
                   result.then((val) => {
                     alert("Transfer done successfully. The new nonce is " + newNonce);
                   }).catch((err) => {
@@ -149,7 +154,17 @@ class TransferForm extends React.Component {
                     autoComplete="shipping address-level2"
                   />
                 </Grid>
-                <Button variant="contained" color='primary'>Transfer Token</Button>
+                <Grid item xs={12} sm={12}>
+                  <TextField
+                    required
+                    id="NewOwnerTransfer"
+                    name="New Owner"
+                    label="New Owner"
+                    fullWidth
+                    autoComplete="shipping address-level2"
+                  />
+                </Grid>
+                <Button variant="contained" color='primary' onClick={this.transferToken}>Transfer Token</Button>
               </Grid>
             </React.Fragment>
           );
