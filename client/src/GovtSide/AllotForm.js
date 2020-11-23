@@ -53,7 +53,7 @@ class AllotForm extends React.Component {
           else {
             let result = contract.methods.allot(hash_loc, hash, drizzleState.accounts[newOwner]).send({
               from: drizzleState.accounts[userId],
-              gas: 3000000
+              gas: 5000000
             });
             result.then((val) => {
               alert("Allotment Complete! Please note your nonce is " + nonce + ". Do Not Forget!");

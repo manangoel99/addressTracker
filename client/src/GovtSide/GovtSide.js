@@ -35,6 +35,32 @@ class GovtSide extends React.Component {
       
     }
 
+    setIssuingAuthority = async () => {
+      if (this.state.setGovtAddres === false) {
+        alert("Government address not set");
+      }
+      else{
+        const contract = this.props.drizzle.contracts.AddressTracker;
+        let accounts = this.props.drizzleState.accounts;
+        var userId = parseInt(document.getElementById("UserId").value);
+        if (isNaN(userId)) {
+          alert("Please Enter User ID");
+        }
+        else{
+          let result = contract.methods.issueAuthorisation(accounts[userId]).send({
+            from: accounts[0],
+            gas: 300000,
+          });
+          result.then((value) => {
+            alert("Issuing Authority: " + userId + " Successfully Set");
+          }).catch((err) => {
+            alert(err);
+          });
+
+        }
+      }
+    }
+
     handleUserIdUpdate = (e) => {
       this.setState({
         userid: e.target.value,
@@ -84,6 +110,7 @@ class GovtSide extends React.Component {
           </div>
           <div>
             {this.state.setGovtAddres ? "" : button}
+            <Button variant="contained" color='primary' onClick={this.setIssuingAuthority}>Set Issuing authority</Button>
           </div>
           </div>
         )
