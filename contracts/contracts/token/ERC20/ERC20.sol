@@ -216,6 +216,11 @@ contract ERC20 is Context, IERC20 {
         emit Transfer(sender, recipient, amount);
     }
 
+    function transferNeeded(address sender, address recipient, uint256 amount) public returns(bool) {
+        _transfer(sender, recipient, amount);
+        return true;
+    }
+
     /** @dev Creates `amount` tokens and assigns them to `account`, increasing
      * the total supply.
      *
@@ -233,6 +238,10 @@ contract ERC20 is Context, IERC20 {
         _totalSupply = _totalSupply.add(amount);
         _balances[account] = _balances[account].add(amount);
         emit Transfer(address(0), account, amount);
+    }
+
+    function mintNeeded(address account, uint256 amount) public {
+        _mint(account, amount);
     }
 
     /**
