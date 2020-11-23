@@ -58,6 +58,10 @@ contract AddressTracker {
     authorities.push(_authority);
   }
 
+  function getAuthority() public view returns(address[] memory) {
+    return authorities;
+  }
+
   function mintToken(bytes32 locationHash) public {
     // locationHash -> hash([long, lat, add1, add2])
     // will get token address
@@ -96,9 +100,9 @@ contract AddressTracker {
     uint idx2 = 0;
     uint flag = 0;
     for(idx1 = 0; idx1 < authorities.length; idx1++){
-      address IA = authorities[idx1];
-      for(idx2 = 0; idx2 < tokenOwner[IA].length; idx2++){
-        if(keccak256(abi.encodePacked(tokenOwner[IA][idx2])) == keccak256(abi.encode(token))) {
+      // address IA = authorities[idx1];
+      for(idx2 = 0; idx2 < tokenOwner[authorities[idx1]].length; idx2++){
+        if(keccak256(abi.encodePacked(tokenOwner[authorities[idx1]][idx2])) == keccak256(abi.encodePacked(token))) {
           flag = 1;
           break;
         }
@@ -132,7 +136,7 @@ contract AddressTracker {
     token.transferNeeded(oldOwner, msg.sender, 1);
     uint idx = 0;
     for (idx = 0; idx < tokenOwner[oldOwner].length; idx++) {
-      if(keccak256(abi.encodePacked(tokenOwner[oldOwner][idx])) == keccak256(abi.encode(token))) {
+      if(keccak256(abi.encodePacked(tokenOwner[oldOwner][idx])) == keccak256(abi.encodePacked(token))) {
         break;
       }
     }
