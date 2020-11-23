@@ -10,7 +10,11 @@ import { Container } from "@material-ui/core";
 // import Nav from 'react-bootstrap/Nav'
 
 class App extends React.Component {
-  state = { loading: true, drizzleState: null };
+  state = { 
+    loading: true, 
+    drizzleState: null,
+    setGovtAddress: false,
+  };
 
   componentDidMount() {
     const { drizzle } = this.props;

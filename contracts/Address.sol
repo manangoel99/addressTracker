@@ -1,14 +1,28 @@
-pragma solidity 0.5.16;
+pragma solidity ^0.6.0;
 
-contract Users {
+contract Address {
   
   mapping(bytes32 => address) locationToToken; 
   mapping(address => address) tokenToOwner;
   mapping(address => bytes32) tokenToCompleteHash;
+
+  address govtAddress;
+  bool addressSet;
+
+  constructor() public {
+    addressSet = false;
+  }
+
+  function setGovtAddress(address _govtAddress) public {
+    require(addressSet == false, "The government address should not be set");
+    govtAddress = _govtAddress;
+    addressSet = true;
+  }
   
   function mintToken(bytes32 locationHash) public {
     // locationHash -> hash([long, lat, add1, add2])
     // will get token address
+    require(msg.sender == govtAddress, "Only the government can mint tokens");
     address tkn;
     locationToToken[locationHash] = tkn;
   }
@@ -17,7 +31,7 @@ contract Users {
     // locationHash -> hash([long, lat, add1, add2])
     // completeHash -> hash([long, lat, add1, add2, resident hash, nonce])
     // owner -> first resident
-
+    require(msg.sender == govtAddress, "Only the government can allot a new token");
     address token = locationToToken[locationHash];
     tokenToCompleteHash[token] = completeHash;
     tokenToOwner[token] = owner;
