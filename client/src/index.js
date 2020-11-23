@@ -9,11 +9,11 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 // import drizzle functions and contract artifact
 import { Drizzle, generateStore } from "@drizzle/store";
 import MyStringStore from "./contracts/MyStringStore.json";
-import Address from "./contracts/Address.json";
+import AddressTracker from "./contracts/AddressTracker.json";
 
 // let drizzle know what contracts we want and how to access our test blockchain
 const options = {
-  contracts: [MyStringStore, Address],
+  contracts: [MyStringStore, AddressTracker],
   web3: {
     fallback: {
       type: "ws",

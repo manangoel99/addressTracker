@@ -265,15 +265,15 @@
     "absolutePath": "/home/manan/Desktop/CollegeStuff/Sem7/Blockchain/Project/addressTracker/contracts/contracts/mocks/AccessControlMock.sol",
     "exportedSymbols": {
       "AccessControlMock": [
-        3617
+        3625
       ]
     },
-    "id": 3618,
+    "id": 3626,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3590,
+        "id": 3598,
         "literals": [
           "solidity",
           ">=",
@@ -289,10 +289,10 @@
       {
         "absolutePath": "/home/manan/Desktop/CollegeStuff/Sem7/Blockchain/Project/addressTracker/contracts/contracts/access/AccessControl.sol",
         "file": "../access/AccessControl.sol",
-        "id": 3591,
+        "id": 3599,
         "nodeType": "ImportDirective",
-        "scope": 3618,
-        "sourceUnit": 1705,
+        "scope": 3626,
+        "sourceUnit": 1713,
         "src": "66:37:24",
         "symbolAliases": [],
         "unitAlias": ""
@@ -304,40 +304,40 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 3592,
+              "id": 3600,
               "name": "AccessControl",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1704,
+              "referencedDeclaration": 1712,
               "src": "135:13:24",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_AccessControl_$1704",
+                "typeIdentifier": "t_contract$_AccessControl_$1712",
                 "typeString": "contract AccessControl"
               }
             },
-            "id": 3593,
+            "id": 3601,
             "nodeType": "InheritanceSpecifier",
             "src": "135:13:24"
           }
         ],
         "contractDependencies": [
-          257,
-          1704
+          265,
+          1712
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3617,
+        "id": 3625,
         "linearizedBaseContracts": [
-          3617,
-          1704,
-          257
+          3625,
+          1712,
+          265
         ],
         "name": "AccessControlMock",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 3602,
+              "id": 3610,
               "nodeType": "Block",
               "src": "176:61:24",
               "statements": [
@@ -347,11 +347,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 3597,
+                        "id": 3605,
                         "name": "DEFAULT_ADMIN_ROLE",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1447,
+                        "referencedDeclaration": 1455,
                         "src": "197:18:24",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
@@ -363,18 +363,18 @@
                         "arguments": [],
                         "expression": {
                           "argumentTypes": [],
-                          "id": 3598,
+                          "id": 3606,
                           "name": "_msgSender",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 245,
+                          "referencedDeclaration": 253,
                           "src": "217:10:24",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_internal_view$__$returns$_t_address_payable_$",
                             "typeString": "function () view returns (address payable)"
                           }
                         },
-                        "id": 3599,
+                        "id": 3607,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -401,18 +401,18 @@
                           "typeString": "address payable"
                         }
                       ],
-                      "id": 3596,
+                      "id": 3604,
                       "name": "_setupRole",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1630,
+                      "referencedDeclaration": 1638,
                       "src": "186:10:24",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_bytes32_$_t_address_$returns$__$",
                         "typeString": "function (bytes32,address)"
                       }
                     },
-                    "id": 3600,
+                    "id": 3608,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -427,14 +427,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3601,
+                  "id": 3609,
                   "nodeType": "ExpressionStatement",
                   "src": "186:44:24"
                 }
               ]
             },
             "documentation": null,
-            "id": 3603,
+            "id": 3611,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
@@ -442,18 +442,18 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 3594,
+              "id": 3602,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "166:2:24"
             },
             "returnParameters": {
-              "id": 3595,
+              "id": 3603,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "176:0:24"
             },
-            "scope": 3617,
+            "scope": 3625,
             "src": "155:82:24",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -461,7 +461,7 @@
           },
           {
             "body": {
-              "id": 3615,
+              "id": 3623,
               "nodeType": "Block",
               "src": "309:51:24",
               "statements": [
@@ -471,11 +471,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 3611,
+                        "id": 3619,
                         "name": "roleId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3605,
+                        "referencedDeclaration": 3613,
                         "src": "333:6:24",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
@@ -484,11 +484,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 3612,
+                        "id": 3620,
                         "name": "adminRoleId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3607,
+                        "referencedDeclaration": 3615,
                         "src": "341:11:24",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
@@ -507,18 +507,18 @@
                           "typeString": "bytes32"
                         }
                       ],
-                      "id": 3610,
+                      "id": 3618,
                       "name": "_setRoleAdmin",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1655,
+                      "referencedDeclaration": 1663,
                       "src": "319:13:24",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_bytes32_$_t_bytes32_$returns$__$",
                         "typeString": "function (bytes32,bytes32)"
                       }
                     },
-                    "id": 3613,
+                    "id": 3621,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -533,7 +533,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3614,
+                  "id": 3622,
                   "nodeType": "ExpressionStatement",
                   "src": "319:34:24"
                 }
@@ -541,7 +541,7 @@
             },
             "documentation": null,
             "functionSelector": "1e4e0091",
-            "id": 3616,
+            "id": 3624,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -549,17 +549,17 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 3608,
+              "id": 3616,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3605,
+                  "id": 3613,
                   "mutability": "mutable",
                   "name": "roleId",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 3616,
+                  "scope": 3624,
                   "src": "265:14:24",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -568,7 +568,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 3604,
+                    "id": 3612,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "265:7:24",
@@ -582,12 +582,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3607,
+                  "id": 3615,
                   "mutability": "mutable",
                   "name": "adminRoleId",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 3616,
+                  "scope": 3624,
                   "src": "281:19:24",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -596,7 +596,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 3606,
+                    "id": 3614,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "281:7:24",
@@ -612,19 +612,19 @@
               "src": "264:37:24"
             },
             "returnParameters": {
-              "id": 3609,
+              "id": 3617,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "309:0:24"
             },
-            "scope": 3617,
+            "scope": 3625,
             "src": "243:117:24",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 3618,
+        "scope": 3626,
         "src": "105:257:24"
       }
     ],
@@ -634,15 +634,15 @@
     "absolutePath": "/home/manan/Desktop/CollegeStuff/Sem7/Blockchain/Project/addressTracker/contracts/contracts/mocks/AccessControlMock.sol",
     "exportedSymbols": {
       "AccessControlMock": [
-        3617
+        3625
       ]
     },
-    "id": 3618,
+    "id": 3626,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3590,
+        "id": 3598,
         "literals": [
           "solidity",
           ">=",
@@ -658,10 +658,10 @@
       {
         "absolutePath": "/home/manan/Desktop/CollegeStuff/Sem7/Blockchain/Project/addressTracker/contracts/contracts/access/AccessControl.sol",
         "file": "../access/AccessControl.sol",
-        "id": 3591,
+        "id": 3599,
         "nodeType": "ImportDirective",
-        "scope": 3618,
-        "sourceUnit": 1705,
+        "scope": 3626,
+        "sourceUnit": 1713,
         "src": "66:37:24",
         "symbolAliases": [],
         "unitAlias": ""
@@ -673,40 +673,40 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 3592,
+              "id": 3600,
               "name": "AccessControl",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1704,
+              "referencedDeclaration": 1712,
               "src": "135:13:24",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_AccessControl_$1704",
+                "typeIdentifier": "t_contract$_AccessControl_$1712",
                 "typeString": "contract AccessControl"
               }
             },
-            "id": 3593,
+            "id": 3601,
             "nodeType": "InheritanceSpecifier",
             "src": "135:13:24"
           }
         ],
         "contractDependencies": [
-          257,
-          1704
+          265,
+          1712
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3617,
+        "id": 3625,
         "linearizedBaseContracts": [
-          3617,
-          1704,
-          257
+          3625,
+          1712,
+          265
         ],
         "name": "AccessControlMock",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 3602,
+              "id": 3610,
               "nodeType": "Block",
               "src": "176:61:24",
               "statements": [
@@ -716,11 +716,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 3597,
+                        "id": 3605,
                         "name": "DEFAULT_ADMIN_ROLE",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1447,
+                        "referencedDeclaration": 1455,
                         "src": "197:18:24",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
@@ -732,18 +732,18 @@
                         "arguments": [],
                         "expression": {
                           "argumentTypes": [],
-                          "id": 3598,
+                          "id": 3606,
                           "name": "_msgSender",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 245,
+                          "referencedDeclaration": 253,
                           "src": "217:10:24",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_internal_view$__$returns$_t_address_payable_$",
                             "typeString": "function () view returns (address payable)"
                           }
                         },
-                        "id": 3599,
+                        "id": 3607,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -770,18 +770,18 @@
                           "typeString": "address payable"
                         }
                       ],
-                      "id": 3596,
+                      "id": 3604,
                       "name": "_setupRole",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1630,
+                      "referencedDeclaration": 1638,
                       "src": "186:10:24",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_bytes32_$_t_address_$returns$__$",
                         "typeString": "function (bytes32,address)"
                       }
                     },
-                    "id": 3600,
+                    "id": 3608,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -796,14 +796,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3601,
+                  "id": 3609,
                   "nodeType": "ExpressionStatement",
                   "src": "186:44:24"
                 }
               ]
             },
             "documentation": null,
-            "id": 3603,
+            "id": 3611,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
@@ -811,18 +811,18 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 3594,
+              "id": 3602,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "166:2:24"
             },
             "returnParameters": {
-              "id": 3595,
+              "id": 3603,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "176:0:24"
             },
-            "scope": 3617,
+            "scope": 3625,
             "src": "155:82:24",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -830,7 +830,7 @@
           },
           {
             "body": {
-              "id": 3615,
+              "id": 3623,
               "nodeType": "Block",
               "src": "309:51:24",
               "statements": [
@@ -840,11 +840,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 3611,
+                        "id": 3619,
                         "name": "roleId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3605,
+                        "referencedDeclaration": 3613,
                         "src": "333:6:24",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
@@ -853,11 +853,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 3612,
+                        "id": 3620,
                         "name": "adminRoleId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3607,
+                        "referencedDeclaration": 3615,
                         "src": "341:11:24",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
@@ -876,18 +876,18 @@
                           "typeString": "bytes32"
                         }
                       ],
-                      "id": 3610,
+                      "id": 3618,
                       "name": "_setRoleAdmin",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1655,
+                      "referencedDeclaration": 1663,
                       "src": "319:13:24",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_bytes32_$_t_bytes32_$returns$__$",
                         "typeString": "function (bytes32,bytes32)"
                       }
                     },
-                    "id": 3613,
+                    "id": 3621,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -902,7 +902,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3614,
+                  "id": 3622,
                   "nodeType": "ExpressionStatement",
                   "src": "319:34:24"
                 }
@@ -910,7 +910,7 @@
             },
             "documentation": null,
             "functionSelector": "1e4e0091",
-            "id": 3616,
+            "id": 3624,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -918,17 +918,17 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 3608,
+              "id": 3616,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3605,
+                  "id": 3613,
                   "mutability": "mutable",
                   "name": "roleId",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 3616,
+                  "scope": 3624,
                   "src": "265:14:24",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -937,7 +937,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 3604,
+                    "id": 3612,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "265:7:24",
@@ -951,12 +951,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3607,
+                  "id": 3615,
                   "mutability": "mutable",
                   "name": "adminRoleId",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 3616,
+                  "scope": 3624,
                   "src": "281:19:24",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -965,7 +965,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 3606,
+                    "id": 3614,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "281:7:24",
@@ -981,19 +981,19 @@
               "src": "264:37:24"
             },
             "returnParameters": {
-              "id": 3609,
+              "id": 3617,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "309:0:24"
             },
-            "scope": 3617,
+            "scope": 3625,
             "src": "243:117:24",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 3618,
+        "scope": 3626,
         "src": "105:257:24"
       }
     ],
@@ -1005,7 +1005,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.2",
-  "updatedAt": "2020-11-23T03:28:56.917Z",
+  "updatedAt": "2020-11-23T04:34:19.829Z",
   "devdoc": {
     "kind": "dev",
     "methods": {

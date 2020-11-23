@@ -26,17 +26,24 @@ class MintForm extends React.Component {
         [latitude, longitude, address_line_1, address_line_2]
       );
       var hash = web3.utils.sha3(obj, {encoding: "hex"});
-      // let a = await web3.eth.getAccounts();
-      // const { drizzle, drizzleState } = this.props;
-      // const contract = drizzle.contracts.MyStringStore;
-      // let result = contract.methods.set("HAHA").send({
-      //   from: drizzleState.accounts[0],
-      // });
-      // result.then((val) => {
-      //   console.log(val);
-      // }).catch((err) => {
-      //   console.log(err);
-      // });
+      var userId = parseInt(document.getElementById("UserId").value);
+      console.log(userId)
+      if (isNaN(userId)) {
+        alert("Please Enter User ID");
+      }
+      else {
+        const { drizzle, drizzleState } = this.props;
+        const contract = drizzle.contracts.AddressTracker;
+        let result = contract.methods.mintToken(hash).send({
+          from: drizzleState.accounts[userId],
+        });
+        result.then((val) => {
+          alert("Token Minted Successfully");
+        }).catch((err) => {
+          alert(err);
+        });
+      }
+      
     }
   }
   render() {

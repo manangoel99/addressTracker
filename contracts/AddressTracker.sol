@@ -1,6 +1,6 @@
 pragma solidity ^0.6.0;
 
-contract Address {
+contract AddressTracker {
   
   mapping(bytes32 => address) locationToToken; 
   mapping(address => address) tokenToOwner;
@@ -19,6 +19,10 @@ contract Address {
     addressSet = true;
   }
   
+  function getGovtAddress() public returns(address) {
+    return govtAddress;
+  }
+
   function mintToken(bytes32 locationHash) public {
     // locationHash -> hash([long, lat, add1, add2])
     // will get token address
