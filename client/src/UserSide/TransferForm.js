@@ -34,24 +34,43 @@ class TransferForm extends React.Component {
             var latitude = parseFloat(lat.trim()) * 10**8;
             var longitude = parseFloat(long.trim()) * 10**8;
             if (isNaN(longitude) || isNaN(latitude)) {
-              console.log("YO")
               alert("Longitude and Latitude must be numbers")
             }
             else {
                 const web3 = this.props.drizzle.web3;
-                // /var nonce = Math.floor(Math.random() * 10**8);
-                // /var obj = web3.eth.abi.encodeParameters(
-                // /  ['uint', 'uint', 'string', 'string', 'uint[]', 'uint'],
-                // /  [latitude, longitude, address_line_1, address_line_2, residents, nonce]
-                // /);
-                // /var hash = web3.utils.sha3(obj, {encoding: "hex"});
-                // /console.log(hash);
-                // /alert("Your Nonce is " + nonce + " Please do not forget")
+                var newNonce = Math.floor(Math.random() * 10**8);
+                var loc_obj = web3.eth.abi.encodeParameters(
+                  ['uint', 'uint', 'string', 'string'],
+                  [latitude, longitude, address_line_1, address_line_2]
+                );
+                var loc_hash = web3.utils.sha3(loc_obj, {encoding: "hex"});
+
+                var oldNonce = parseInt(document.getElementById("nonce").value.trim());
+                
+                if (isNaN(oldNonce)) {
+                  alert("Make sure nonce is a number")
+                }
+                else {
+                  var old_obj = web3.eth.abi.encodeParameters(
+                    ['uint', 'uint', 'string', 'string', 'uint[]', 'uint'],
+                    [latitude, longitude, address_line_1, address_line_2, residents, oldNonce]
+                  );
+                  var old_hash = web3.utils.sha3(old_obj, {encoding: "hex"});
+                  var new_obj = web3.eth.abi.encodeParameters(
+                    ['uint', 'uint', 'string', 'string', 'uint[]', 'uint'],
+                    [latitude, longitude, address_line_1, address_line_2, NewResidents, newNonce]
+                  );
+                  var new_hash = web3.utils.sha3(new_obj, {encoding: "hex"});
+                  let result = contract.methods.transfer(loc_hash, old_hash, new_hash);
+                  result.then((val) => {
+                    alert("Transfer done successfully. The new nonce is " + newNonce);
+                  }).catch((err) => {
+                    alert(err);
+                  });
+                }
             }
           }
-          
         }
-        
     }
 
     render() {
