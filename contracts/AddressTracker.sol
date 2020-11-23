@@ -1,14 +1,14 @@
 pragma solidity ^0.6.0;
 
-import "./contracts/token/ERC20/ERC20.sol";
+import "./contracts/token/ERC20/ERC20AddressTracker.sol";
 
 contract AddressTracker {
   
-  mapping(bytes32 => ERC20) locationToToken; 
-  mapping(ERC20 => address) tokenToOwner;
-  mapping(ERC20 => bytes32) tokenToCompleteHash;
+  mapping(bytes32 => ERC20AddressTracker) locationToToken; 
+  mapping(ERC20AddressTracker => address) tokenToOwner;
+  mapping(ERC20AddressTracker => bytes32) tokenToCompleteHash;
   mapping(bytes32 => bool) locationExist;
-  mapping(address => ERC20[]) tokenOwner;
+  mapping(address => ERC20AddressTracker[]) tokenOwner;
   address govtAddress;
   bool addressSet;
 
@@ -39,12 +39,12 @@ contract AddressTracker {
       return keccak256(abi.encodePacked(long, lat, a1, a2, res, nonce));
   }  
   
-  function getToken(bytes32 locationHash) public view returns(ERC20){
+  function getToken(bytes32 locationHash) public view returns(ERC20AddressTracker){
       return locationToToken[locationHash];
   }
   */
   function getBalance(address person) public view returns(uint256){
-      ERC20 token = tokenOwner[person][0];
+      ERC20AddressTracker token = tokenOwner[person][0];
       return token.balanceOf(person);
   }
   
@@ -53,7 +53,7 @@ contract AddressTracker {
     // will get token address
     require(locationExist[locationHash] == false, "Token for this location already exist");
     require(msg.sender == govtAddress, "Only the government can mint tokens");
-    ERC20 tkn = new ERC20("x", "x");
+    ERC20AddressTracker tkn = new ERC20AddressTracker("x", "x", locationHash);
     tkn.mintNeeded(govtAddress, 1);
     locationToToken[locationHash] = tkn;
     locationExist[locationHash] = true;
@@ -61,7 +61,7 @@ contract AddressTracker {
     tokenOwner[govtAddress].push(tkn);
   }
 
-  function remove(uint index, ERC20[] memory array) private returns(ERC20[] memory) {
+  function remove(uint index, ERC20AddressTracker[] memory array) private returns(ERC20AddressTracker[] memory) {
         for (uint i = index; i<array.length-1; i++){
             array[i] = array[i+1];
         }
@@ -76,7 +76,7 @@ contract AddressTracker {
     // owner -> first resident
     require(locationExist[locationHash] == true, "Token for this location does not exist");
     require(msg.sender == govtAddress, "Only the government can allot a new token");
-    ERC20 token = locationToToken[locationHash];
+    ERC20AddressTracker token = locationToToken[locationHash];
     require(tokenToOwner[token] == govtAddress, "Token alloted alreay");
     tokenToCompleteHash[token] = completeHash;
     tokenToOwner[token] = owner;
@@ -102,7 +102,7 @@ contract AddressTracker {
     
     require(locationExist[locationHash] == true, "Token for this location does not exist");
     
-    ERC20 token = locationToToken[locationHash];
+    ERC20AddressTracker token = locationToToken[locationHash];
 
     // require(tokenToOwner[token] == msg.sender, "you are not the owner");
     require(tokenToCompleteHash[token] == oldHash, "invalid transfer");
