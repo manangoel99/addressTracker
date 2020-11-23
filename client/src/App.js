@@ -18,7 +18,9 @@ class App extends React.Component {
 
   componentDidMount() {
     const { drizzle } = this.props;
-
+    window.localStorage.setItem("setGovtAddress", JSON.stringify({
+      setGovtAddres : false
+    }));
     // subscribe to changes in the store
     this.unsubscribe = drizzle.store.subscribe(() => {
 

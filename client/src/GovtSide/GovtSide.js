@@ -28,13 +28,15 @@ class GovtSide extends React.Component {
           this.setState({
             setGovtAddres: true,
           });
+          window.localStorage.setItem("setGovtAddress", JSON.stringify({
+            setGovtAddres: true
+          }));
         }).catch((err) => {
           alert(err);
         });
       }
       
     }
-
     setIssuingAuthority = async () => {
       if (this.state.setGovtAddres === false) {
         alert("Government address not set");
@@ -60,7 +62,6 @@ class GovtSide extends React.Component {
         }
       }
     }
-
     handleUserIdUpdate = (e) => {
       this.setState({
         userid: e.target.value,
@@ -109,7 +110,17 @@ class GovtSide extends React.Component {
             </div>
           </div>
           <div>
-            {this.state.setGovtAddres ? "" : button}
+            {[0].map(i => {
+              console.log(window.localStorage);
+              var val = JSON.parse(window.localStorage.getItem('setGovtAddress'));
+              console.log(val);
+              if (this.state.setGovtAddres === true || val.setGovtAddres === true) {
+                return "";
+              }
+              else {
+                return button;
+              }
+            })}
             <Button variant="contained" color='primary' onClick={this.setIssuingAuthority}>Set Issuing authority</Button>
           </div>
           </div>
