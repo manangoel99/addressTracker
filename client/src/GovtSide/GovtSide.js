@@ -38,8 +38,9 @@ class GovtSide extends React.Component {
       
     }
     setIssuingAuthority = async () => {
-      if (this.state.setGovtAddres === false) {
-        alert("Government address not set");
+      var val = JSON.parse(window.localStorage.getItem('setGovtAddress'));
+      if (this.state.setGovtAddres === false && val.setGovtAddres === false) {
+        alert("Government Address not set");
       }
       else{
         const contract = this.props.drizzle.contracts.AddressTracker;
