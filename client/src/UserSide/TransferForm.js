@@ -61,8 +61,9 @@ class TransferForm extends React.Component {
                   const contract = this.props.drizzle.contracts.AddressTracker;
                   var new_hash = web3.utils.sha3(new_obj, {encoding: "hex"});
                   var newOwner = parseInt(document.getElementById("NewOwnerTransfer").value.trim());
+                  var oldOwner = parseInt(document.getElementById("OldOwnerTransfer").value.trim());
                   console.log(loc_hash, old_hash, new_hash, newOwner);
-                  let result = contract.methods.transfer(loc_hash, old_hash, new_hash).send({
+                  let result = contract.methods.transfer(loc_hash, old_hash, new_hash, this.props.drizzleState.accounts[oldOwner]).send({
                     gas: 3000000,
                     from: this.props.drizzleState.accounts[newOwner],
                   });
@@ -185,6 +186,16 @@ class TransferForm extends React.Component {
                     id="NewOwnerTransfer"
                     name="New Owner"
                     label="New Owner"
+                    fullWidth
+                    autoComplete="shipping address-level2"
+                  />
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  <TextField
+                    required
+                    id="OldOwnerTransfer"
+                    name="Old Owner"
+                    label="Old Owner"
                     fullWidth
                     autoComplete="shipping address-level2"
                   />
