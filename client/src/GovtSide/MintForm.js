@@ -38,6 +38,7 @@ class MintForm extends React.Component {
         });
         result.then((val) => {
           alert("Token Minted Successfully");
+          console.log(val);
         }).catch((err) => {
           alert(err);
         });

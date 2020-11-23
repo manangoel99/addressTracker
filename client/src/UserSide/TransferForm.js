@@ -62,7 +62,7 @@ class TransferForm extends React.Component {
                   var new_hash = web3.utils.sha3(new_obj, {encoding: "hex"});
                   var newOwner = parseInt(document.getElementById("NewOwnerTransfer").value.trim());
                   console.log(loc_hash, old_hash, new_hash, newOwner);
-                  let result = await contract.methods.transfer(loc_hash, old_hash, new_hash).send({
+                  let result = contract.methods.transfer(loc_hash, old_hash, new_hash).send({
                     gas: 3000000,
                     from: this.props.drizzleState.accounts[newOwner],
                   });
@@ -76,6 +76,31 @@ class TransferForm extends React.Component {
             }
           }
         }
+    }
+
+    getOwner = async () => {
+      var lat = document.getElementById("TransferLatitude").value;
+      var long = document.getElementById("TransferLongitude").value;
+      var address_line_1 = document.getElementById("TransferAddress1").value;
+      var address_line_2 = document.getElementById("TransferAddress2").value;
+      var latitude = parseFloat(lat.trim()) * 10**8;
+      var longitude = parseFloat(long.trim()) * 10**8;
+      if (isNaN(longitude) || isNaN(latitude)) {
+        console.log("YO")
+        alert("Longitude and Latitude must be numbers")
+      }
+      else {
+        const web3 = this.props.drizzle.web3;
+        var obj = web3.eth.abi.encodeParameters(
+          ['uint', 'uint', 'string', 'string'],
+          [latitude, longitude, address_line_1, address_line_2]
+        );
+        var hash = web3.utils.sha3(obj, {encoding: "hex"});
+        const contract = this.props.drizzle.contracts.AddressTracker;
+        let resp = await contract.methods.getOwner(hash).call();
+        console.log(this.props.drizzleState.accounts);
+        console.log(resp);
+      }
     }
 
     render() {
@@ -165,6 +190,7 @@ class TransferForm extends React.Component {
                   />
                 </Grid>
                 <Button variant="contained" color='primary' onClick={this.transferToken}>Transfer Token</Button>
+                <Button variant="contained" color='primary' onClick={this.getOwner}>Get Owner</Button>
               </Grid>
             </React.Fragment>
           );

@@ -20,17 +20,25 @@ contract AddressTracker {
     govtAddress = _govtAddress;
     addressSet = true;
   }
+
+  function getOwner(bytes32 locHash) public view returns(address) {
+    ERC20 tkn = locationToToken[locHash];
+    address owner = tokenToOwner[tkn];
+    return owner;
+  }
   
-  function getGovtAddress() public returns(address) {
+  function getGovtAddress() public view returns(address) {
     return govtAddress;
   }
 
-  function mintToken(bytes32 locationHash) public {
+  function mintToken(bytes32 locationHash) public returns(ERC20) {
     // locationHash -> hash([long, lat, add1, add2])
     // will get token address
     require(msg.sender == govtAddress, "Only the government can mint tokens");
+    require(locationToToken[locationHash] == 0, "Given location already exists");
     ERC20 tkn = new ERC20("x", "x");
     locationToToken[locationHash] = tkn;
+    return tkn;
   }
   
   function allot(bytes32 locationHash, bytes32 completeHash, address owner) public {
