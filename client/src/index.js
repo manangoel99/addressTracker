@@ -2,12 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'; 
 
-// import * as serviceWorker from './serviceWorker';
 
 // import drizzle functions and contract artifact
-import { Drizzle, generateStore } from "@drizzle/store";
+import { Drizzle } from "@drizzle/store";
 import MyStringStore from "./contracts/MyStringStore.json";
 import AddressTracker from "./contracts/AddressTracker.json";
 

@@ -2,8 +2,6 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 
 class MintForm extends React.Component {
@@ -27,7 +25,6 @@ class MintForm extends React.Component {
       );
       var hash = web3.utils.sha3(obj, {encoding: "hex"});
       var userId = parseInt(document.getElementById("UserId").value);
-      console.log(userId)
       if (isNaN(userId)) {
         alert("Please Enter User ID");
       }
@@ -43,7 +40,6 @@ class MintForm extends React.Component {
           alert(err);
         });
       }
-      
     }
   }
   render() {

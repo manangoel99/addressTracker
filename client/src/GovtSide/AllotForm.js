@@ -2,8 +2,6 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 
 class AllotForm extends React.Component {
@@ -15,7 +13,7 @@ class AllotForm extends React.Component {
     var address_line_2 = document.getElementById("AllotAddress2").value;
     var residents = document.getElementById("residents").value.trim();
     residents = residents.split(",");
-    if (residents.length == 0) {
+    if (residents.length === 0) {
       alert("There must be at least one resident");
     }
     else {
@@ -25,7 +23,6 @@ class AllotForm extends React.Component {
       var latitude = parseFloat(lat.trim()) * 10**8;
       var longitude = parseFloat(long.trim()) * 10**8;
       if (isNaN(longitude) || isNaN(latitude)) {
-        console.log("YO")
         alert("Longitude and Latitude must be numbers")
       }
       else {
@@ -36,19 +33,34 @@ class AllotForm extends React.Component {
           [latitude, longitude, address_line_1, address_line_2, residents, nonce]
         );
         var hash = web3.utils.sha3(obj, {encoding: "hex"});
-        console.log(hash);
-        alert("Your Nonce is " + nonce + " Please do not forget")
-        // let a = await web3.eth.getAccounts();
-        // const { drizzle, drizzleState } = this.props;
-        // const contract = drizzle.contracts.MyStringStore;
-        // let result = contract.methods.set("HAHA").send({
-        //   from: drizzleState.accounts[0],
-        // });
-        // result.then((val) => {
-        //   console.log(val);
-        // }).catch((err) => {
-        //   console.log(err);
-        // });
+        const { drizzle, drizzleState } = this.props;
+        const contract = drizzle.contracts.AddressTracker;
+        var obj_loc = web3.eth.abi.encodeParameters(
+          ['uint', 'uint', 'string', 'string'],
+          [latitude, longitude, address_line_1, address_line_2]
+        );
+        var hash_loc = web3.utils.sha3(obj_loc, {encoding: "hex"});
+        var userId = parseInt(document.getElementById("UserId").value.trim());
+        if (isNaN(userId)) {
+          alert("Please Enter User ID");
+        }
+        else {
+          var newOwner = document.getElementById("newOwner").value.trim();
+          newOwner = parseInt(newOwner);
+          if (isNaN(newOwner)) {
+            alert("New Owner Address invalid");
+          }
+          else {
+            let result = contract.methods.allot(hash_loc, hash, drizzleState.accounts[newOwner]).send({
+              from: drizzleState.accounts[userId],
+            });
+            result.then((val) => {
+              alert("Allotment Complete! Please note your nonce is " + nonce + ". Do Not Forget!");
+            }).catch((err) => {
+              alert(err);
+            });
+          } 
+        }
       }
     }
   }
@@ -105,6 +117,16 @@ class AllotForm extends React.Component {
               id="residents"
               name="Residents"
               label="Comma seperated addresses of residents"
+              fullWidth
+              autoComplete="shipping address-level2"
+            />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <TextField
+              required
+              id="newOwner"
+              name="New Owner"
+              label="New Owner"
               fullWidth
               autoComplete="shipping address-level2"
             />
